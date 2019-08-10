@@ -1,3 +1,7 @@
+# 0.0.3
+
+- fix dartfmt bug
+
 # 0.0.2
 
 - added `flutter packages pub run mjolnir:codegen` for automated code generation of domain classes
