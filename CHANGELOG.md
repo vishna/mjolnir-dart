@@ -1,3 +1,7 @@
+# 0.0.4
+
+- generated classes now have const constructor and all final fields
+
 # 0.0.3
 
 - fix dartfmt bug
