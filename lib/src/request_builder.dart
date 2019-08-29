@@ -341,6 +341,10 @@ class RequestBuilder {
   /// Necessary to obtain generic [Type]
   /// https://github.com/dart-lang/sdk/issues/11923
   static Type _typeOf<T>() => T;
+
+  static void setClientSingleton(Dio value) {
+    _clientSingleton = value;
+  }
 }
 
 Map<String, dynamic> _parsePlainJson(String body) {

@@ -1,3 +1,7 @@
+# 0.0.7
+
+- allow setting custom client singleton
+
 # 0.0.6
 
 - safe date time parsing
