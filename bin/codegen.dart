@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 
 /// fixed version for predictable builds
-const version = "master-5b5d9d2c5c-1";
+const version = "master-d27d2d5821-1";
 const name = "mjolnir";
 
 /// fat jar baked on jitpack

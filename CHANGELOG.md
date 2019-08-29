@@ -1,3 +1,7 @@
+# 0.0.5
+
+- lint ignore rules
+
 # 0.0.4
 
 - generated classes now have const constructor and all final fields
