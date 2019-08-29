@@ -1,3 +1,7 @@
+# 0.0.6
+
+- safe date time parsing
+
 # 0.0.5
 
 - lint ignore rules
