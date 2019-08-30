@@ -333,7 +333,9 @@ class RequestBuilder {
         })
         .then((requestCompute) => compute(_parseResponseList, requestCompute))
         .then((computation) => MjolnirResponse<List<T>>(
-            data: computation, response: _response, requestBuilder: this))
+            data: List<T>.from(computation),
+            response: _response,
+            requestBuilder: this))
         .catchError((error) => MjolnirResponse<List<T>>(
             error: error, response: _response, requestBuilder: this));
   }

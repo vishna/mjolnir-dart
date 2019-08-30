@@ -1,3 +1,7 @@
+# 0.0.8
+
+- make RequestBuilder.listOf work properly
+
 # 0.0.7
 
 - allow setting custom client singleton
