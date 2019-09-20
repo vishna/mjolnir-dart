@@ -1,3 +1,7 @@
+# 0.0.10
+
+- ignore more lint options for reals now
+
 # 0.0.9
 
 - ignore some more lint options

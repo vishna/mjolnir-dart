@@ -1,6 +1,6 @@
 name: mjolnir
 description: Mjolnir for Dart. An API SDK building tool.
-version: 0.0.9
+version: 0.0.10
 author: Lukasz Wisniewski <luke.cherrish@gmail.com>
 homepage: https://github.com/vishna/mjolnir-dart
 
