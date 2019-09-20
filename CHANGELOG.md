@@ -1,3 +1,7 @@
+# 0.0.9
+
+- ignore some more lint options
+
 # 0.0.8
 
 - make RequestBuilder.listOf work properly
