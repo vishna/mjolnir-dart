@@ -1,3 +1,7 @@
+# 0.0.11
+
+- `_id` type for identifier fields
+
 # 0.0.10
 
 - ignore more lint options for reals now
