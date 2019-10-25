@@ -306,7 +306,10 @@ class RequestBuilder {
         })
         .then((requestCompute) => compute(_parseResponseObject, requestCompute))
         .then((computation) => MjolnirResponse<T>(
-            data: computation, response: _response, requestBuilder: this))
+            responseJson: computation.responseJson,
+            data: computation.data,
+            response: _response,
+            requestBuilder: this))
         .catchError((error) => MjolnirResponse<T>(
             error: error, response: _response, requestBuilder: this));
   }
@@ -333,7 +336,8 @@ class RequestBuilder {
         })
         .then((requestCompute) => compute(_parseResponseList, requestCompute))
         .then((computation) => MjolnirResponse<List<T>>(
-            data: List<T>.from(computation),
+            responseJson: computation.responseJson,
+            data: List<T>.from(computation.data),
             response: _response,
             requestBuilder: this))
         .catchError((error) => MjolnirResponse<List<T>>(
@@ -353,23 +357,35 @@ Map<String, dynamic> _parsePlainJson(String body) {
   return json.decode(body) as Map<String, dynamic>;
 }
 
-dynamic _parseResponseObject(RequestCompute requestCompute) {
+class _ResponseObject {
+  _ResponseObject(this.responseJson, this.data);
+  final Map<String, dynamic> responseJson;
+  final dynamic data;
+}
+
+_ResponseObject _parseResponseObject(RequestCompute requestCompute) {
   var responseJSON = (json.decode(requestCompute.body) as Map<String, dynamic>);
   final jsonResponse =
       requestCompute.declutter?.jsonPath(responseJSON) ?? responseJSON;
   final deserializer =
       requestCompute.deserializerByClassName(requestCompute.objectOf_);
-  return deserializer(jsonResponse);
+  return _ResponseObject(responseJSON, deserializer(jsonResponse));
 }
 
-List<dynamic> _parseResponseList(RequestCompute requestCompute) {
+class _ResponseList {
+  _ResponseList(this.responseJson, this.data);
+  final Map<String, dynamic> responseJson;
+  final List<dynamic> data;
+}
+
+_ResponseList _parseResponseList(RequestCompute requestCompute) {
   var responseJSON = (json.decode(requestCompute.body) as Map<String, dynamic>);
   final jsonResponse =
       requestCompute.declutter?.jsonPath(responseJSON) ?? responseJSON;
   final deserializer =
       requestCompute.deserializerByClassName(requestCompute.listOf_);
 
-  return jsonResponse.map(deserializer).toList();
+  return _ResponseList(responseJSON, jsonResponse.map(deserializer).toList());
 }
 
 class StringWrapper {
@@ -414,12 +430,18 @@ class _MjonirPostTransformer extends DefaultTransformer {
 }
 
 class MjolnirResponse<T> {
+  final Map<String, dynamic> responseJson;
   final T data;
   final dynamic error;
   final Response response;
   final RequestBuilder requestBuilder;
 
-  MjolnirResponse({this.data, this.error, this.response, this.requestBuilder});
+  MjolnirResponse(
+      {this.responseJson,
+      this.data,
+      this.error,
+      this.response,
+      this.requestBuilder});
 
   bool get isSuccessful {
     return data != null && error == null;

@@ -1,3 +1,7 @@
+# 0.0.12
+
+- Expose parsed json response in `MjolnirResponse`
+
 # 0.0.11
 
 - `_id` type for identifier fields
