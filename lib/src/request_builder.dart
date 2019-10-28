@@ -353,18 +353,18 @@ class RequestBuilder {
   }
 }
 
-Map<String, dynamic> _parsePlainJson(String body) {
-  return json.decode(body) as Map<String, dynamic>;
+Map<dynamic, dynamic> _parsePlainJson(String body) {
+  return json.decode(body) as Map<dynamic, dynamic>;
 }
 
 class _ResponseObject {
   _ResponseObject(this.responseJson, this.data);
-  final Map<String, dynamic> responseJson;
+  final Map<dynamic, dynamic> responseJson;
   final dynamic data;
 }
 
 _ResponseObject _parseResponseObject(RequestCompute requestCompute) {
-  var responseJSON = (json.decode(requestCompute.body) as Map<String, dynamic>);
+  var responseJSON = (json.decode(requestCompute.body) as Map<dynamic, dynamic>);
   final jsonResponse =
       requestCompute.declutter?.jsonPath(responseJSON) ?? responseJSON;
   final deserializer =
@@ -374,12 +374,12 @@ _ResponseObject _parseResponseObject(RequestCompute requestCompute) {
 
 class _ResponseList {
   _ResponseList(this.responseJson, this.data);
-  final Map<String, dynamic> responseJson;
+  final Map<dynamic, dynamic> responseJson;
   final List<dynamic> data;
 }
 
 _ResponseList _parseResponseList(RequestCompute requestCompute) {
-  var responseJSON = (json.decode(requestCompute.body) as Map<String, dynamic>);
+  var responseJSON = (json.decode(requestCompute.body) as Map<dynamic, dynamic>);
   final jsonResponse =
       requestCompute.declutter?.jsonPath(responseJSON) ?? responseJSON;
   final deserializer =

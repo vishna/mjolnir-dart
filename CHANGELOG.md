@@ -1,3 +1,7 @@
+# 0.0.14
+
+- fix compute parsing
+
 # 0.0.13
 
 - Change Map<String, dynamic> to Map<dynamic, dynamic>
