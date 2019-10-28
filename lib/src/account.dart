@@ -7,13 +7,13 @@ abstract class Account {
 
   RequestBuilder sign(RequestBuilder requestBuilder);
 
-  static void fromJson(Account account, Map<String, dynamic> json) {
+  static void fromJson(Account account, Map<dynamic, dynamic> json) {
     account.type = json["type"]?.toString() ?? "";
     account.id = json["id"]?.toString() ?? "";
   }
 
-  Map<String, dynamic> toJson() {
-    final output = Map<String, dynamic>();
+  Map<dynamic, dynamic> toJson() {
+    final output = Map<dynamic, dynamic>();
     output["type"] = type;
     output["id"] = id;
     return output;
@@ -36,13 +36,13 @@ abstract class OAuth2Account extends Account {
     accessToken = auth.access_token;
   }
 
-  static void fromJson(OAuth2Account account, Map<String, dynamic> json) {
+  static void fromJson(OAuth2Account account, Map<dynamic, dynamic> json) {
     Account.fromJson(account, json);
     account.accessToken = json["accessToken"]?.toString() ?? "";
   }
 
   @override
-  Map<String, dynamic> toJson() {
+  Map<dynamic, dynamic> toJson() {
     final output = super.toJson();
     output["accessToken"] = accessToken;
     return output;

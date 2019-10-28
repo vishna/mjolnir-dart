@@ -1,3 +1,7 @@
+# 0.0.13
+
+- Change Map<String, dynamic> to Map<dynamic, dynamic>
+
 # 0.0.12
 
 - Expose parsed json response in `MjolnirResponse`
