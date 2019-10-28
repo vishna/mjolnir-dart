@@ -277,14 +277,14 @@ class RequestBuilder {
         "implement this method by extending RequestBuilder class");
   }
 
-  Future<MjolnirResponse<Map<String, dynamic>>> plainJson() {
+  Future<MjolnirResponse<Map<dynamic, dynamic>>> plainJson() {
     Response _response;
 
     return asResponse()
         .then((response) => compute(_parsePlainJson, response.data.toString()))
-        .then((computation) => MjolnirResponse<Map<String, dynamic>>(
+        .then((computation) => MjolnirResponse<Map<dynamic, dynamic>>(
             data: computation, response: _response, requestBuilder: this))
-        .catchError((error) => MjolnirResponse<Map<String, dynamic>>(
+        .catchError((error) => MjolnirResponse<Map<dynamic, dynamic>>(
             error: error, response: _response, requestBuilder: this));
   }
 

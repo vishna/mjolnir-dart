@@ -11,7 +11,7 @@ class PathDeclutter {
     return PathDeclutter(keys);
   }
 
-  dynamic jsonPath(Map<String, dynamic> input) {
+  dynamic jsonPath(Map<dynamic, dynamic> input) {
     dynamic output = input;
     for (int i = 0; i < keys.length; i++) {
       output = output[keys[i]];
