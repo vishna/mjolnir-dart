@@ -1,3 +1,7 @@
+# 0.0.16
+
+- more paranoid parser
+
 # 0.0.15
 
 - fix declutter
