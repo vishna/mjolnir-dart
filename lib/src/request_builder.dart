@@ -14,6 +14,8 @@ enum RequestMethod { get, put, delete, post, patch }
 
 bool isEmpty(String value) => (value == null || value.length == 0);
 
+const _CONTENT_TYPE_JSON = "application/json; charset=utf-8";
+
 class RequestBuilder {
   String host;
   String path;
@@ -131,17 +133,17 @@ class RequestBuilder {
     }
   }
 
-  RequestBuilder setContent(String content, String content_type) {
+  RequestBuilder setContent(String content, String contentType) {
     this.content = content;
-    this.content_type = content_type;
+    this.content_type = contentType;
     return this;
   }
 
-//  RequestBuilder setJsonContent(JSONObject jsonContent) {
-//    this.content = jsonContent.toString();
-//    this.content_type = "application/json; charset=utf-8";
-//    return this;
-//  }
+  RequestBuilder setJsonContent(Map<dynamic, dynamic> jsonContent) {
+    this.content = json.encode(jsonContent);
+    this.content_type = _CONTENT_TYPE_JSON;
+    return this;
+  }
 
   RequestBuilder header(String key, String value) {
     headers[key] = value;
@@ -256,8 +258,9 @@ class RequestBuilder {
           if (formData != null) {
             _data = formData;
           } else {
+            requestOptions.data = content;
             requestOptions.contentType =
-                _MjonirPostTransformer.requestBuilderType;
+                content_type ?? _MjonirPostTransformer.requestBuilderType;
           }
           break;
         }
@@ -284,8 +287,27 @@ class RequestBuilder {
         .then((response) => compute(_parsePlainJson, response.data.toString()))
         .then((computation) => MjolnirResponse<Map<dynamic, dynamic>>(
             data: computation, response: _response, requestBuilder: this))
-        .catchError((error) => MjolnirResponse<Map<dynamic, dynamic>>(
-            error: error, response: _response, requestBuilder: this));
+        .catchError((error, stacktrace) =>
+            MjolnirResponse<Map<dynamic, dynamic>>(
+                error: error,
+                stacktrace: stacktrace,
+                response: _response,
+                requestBuilder: this));
+  }
+
+  Future<MjolnirResponse<List<dynamic>>> plainJsonArray() {
+    Response _response;
+
+    return asResponse()
+        .then((response) =>
+            compute(_parsePlainJsonArray, response.data.toString()))
+        .then((computation) => MjolnirResponse<List<dynamic>>(
+            data: computation, response: _response, requestBuilder: this))
+        .catchError((error, stacktrace) => MjolnirResponse<List<dynamic>>(
+            error: error,
+            stacktrace: stacktrace,
+            response: _response,
+            requestBuilder: this));
   }
 
   Future<MjolnirResponse<T>> objectOf<T>({String type}) {
@@ -310,8 +332,11 @@ class RequestBuilder {
             data: computation.data,
             response: _response,
             requestBuilder: this))
-        .catchError((error) => MjolnirResponse<T>(
-            error: error, response: _response, requestBuilder: this));
+        .catchError((error, stacktrace) => MjolnirResponse<T>(
+            error: error,
+            stacktrace: stacktrace,
+            response: _response,
+            requestBuilder: this));
   }
 
   Future<MjolnirResponse<List<T>>> listOf<T>({String type}) {
@@ -340,7 +365,7 @@ class RequestBuilder {
             data: List<T>.from(computation.data),
             response: _response,
             requestBuilder: this))
-        .catchError((error) => MjolnirResponse<List<T>>(
+        .catchError((error, stacktrace) => MjolnirResponse<List<T>>(
             error: error, response: _response, requestBuilder: this));
   }
 
@@ -357,6 +382,10 @@ Map<dynamic, dynamic> _parsePlainJson(String body) {
   return json.decode(body) as Map<dynamic, dynamic>;
 }
 
+List<dynamic> _parsePlainJsonArray(String body) {
+  return json.decode(body);
+}
+
 class _ResponseObject {
   _ResponseObject(this.responseJson, this.data);
   final Map<dynamic, dynamic> responseJson;
@@ -364,7 +393,8 @@ class _ResponseObject {
 }
 
 _ResponseObject _parseResponseObject(RequestCompute requestCompute) {
-  var responseJSON = (json.decode(requestCompute.body) as Map<dynamic, dynamic>);
+  var responseJSON =
+      (json.decode(requestCompute.body) as Map<dynamic, dynamic>);
   final jsonResponse =
       requestCompute.declutter?.jsonPath(responseJSON) ?? responseJSON;
   final deserializer =
@@ -379,7 +409,8 @@ class _ResponseList {
 }
 
 _ResponseList _parseResponseList(RequestCompute requestCompute) {
-  var responseJSON = (json.decode(requestCompute.body) as Map<dynamic, dynamic>);
+  var responseJSON =
+      (json.decode(requestCompute.body) as Map<dynamic, dynamic>);
   final jsonResponse =
       requestCompute.declutter?.jsonPath(responseJSON) ?? responseJSON;
   final deserializer =
@@ -433,6 +464,7 @@ class MjolnirResponse<T> {
   final Map<String, dynamic> responseJson;
   final T data;
   final dynamic error;
+  final dynamic stacktrace;
   final Response response;
   final RequestBuilder requestBuilder;
 
@@ -441,6 +473,7 @@ class MjolnirResponse<T> {
       this.data,
       this.error,
       this.response,
+      this.stacktrace,
       this.requestBuilder});
 
   bool get isSuccessful {

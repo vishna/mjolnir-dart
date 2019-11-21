@@ -1,3 +1,9 @@
+# 0.0.17
+
+- include stacktrace in Mjolnir response
+- add setContentJson
+- plainJsonArray
+
 # 0.0.16
 
 - more paranoid parser
