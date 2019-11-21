@@ -31,7 +31,7 @@ class RequestBuilder {
   Account account;
   RequestMethod method = RequestMethod.get;
   String content;
-  String content_type;
+  ContentType content_type;
   Pagination pagination;
   FormData formData;
   ProgressCallback onSendProgress;
@@ -135,13 +135,13 @@ class RequestBuilder {
 
   RequestBuilder setContent(String content, String contentType) {
     this.content = content;
-    this.content_type = contentType;
+    this.content_type = ContentType.parse(contentType);
     return this;
   }
 
   RequestBuilder setJsonContent(Map<dynamic, dynamic> jsonContent) {
     this.content = json.encode(jsonContent);
-    this.content_type = _CONTENT_TYPE_JSON;
+    this.content_type = ContentType.parse(_CONTENT_TYPE_JSON);
     return this;
   }
 

@@ -1,3 +1,7 @@
+# 0.0.18
+
+- fix type of ContentType
+
 # 0.0.17
 
 - include stacktrace in Mjolnir response
