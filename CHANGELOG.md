@@ -1,3 +1,7 @@
+# 0.0.19
+
+- make content dynamic type
+
 # 0.0.18
 
 - fix type of ContentType

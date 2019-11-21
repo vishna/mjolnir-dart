@@ -30,7 +30,7 @@ class RequestBuilder {
 
   Account account;
   RequestMethod method = RequestMethod.get;
-  String content;
+  dynamic content;
   ContentType content_type;
   Pagination pagination;
   FormData formData;
@@ -140,7 +140,7 @@ class RequestBuilder {
   }
 
   RequestBuilder setJsonContent(Map<dynamic, dynamic> jsonContent) {
-    this.content = json.encode(jsonContent);
+    this.content = jsonContent;
     this.content_type = ContentType.parse(_CONTENT_TYPE_JSON);
     return this;
   }
