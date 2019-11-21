@@ -1,3 +1,7 @@
+# 0.0.20
+
+- make json content work
+
 # 0.0.19
 
 - make content dynamic type

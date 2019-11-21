@@ -258,9 +258,12 @@ class RequestBuilder {
           if (formData != null) {
             _data = formData;
           } else {
-            requestOptions.data = content;
-            requestOptions.contentType =
-                content_type ?? _MjonirPostTransformer.requestBuilderType;
+            if (content != null && content_type != null) {
+              _data = content;
+              requestOptions.contentType = content_type;
+            } else {
+              requestOptions.contentType = _MjonirPostTransformer.requestBuilderType;
+            }
           }
           break;
         }
