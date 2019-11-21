@@ -1,3 +1,7 @@
+# 0.0.21
+
+- fix "_smi is not a subtype of bool" exception
+
 # 0.0.20
 
 - make json content work
