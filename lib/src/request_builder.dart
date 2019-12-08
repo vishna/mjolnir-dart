@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'pagination.dart';
 import 'package:flutter/foundation.dart';
@@ -31,7 +30,7 @@ class RequestBuilder {
   Account account;
   RequestMethod method = RequestMethod.get;
   dynamic content;
-  ContentType content_type;
+  String content_type;
   Pagination pagination;
   FormData formData;
   ProgressCallback onSendProgress;
@@ -135,13 +134,13 @@ class RequestBuilder {
 
   RequestBuilder setContent(String content, String contentType) {
     this.content = content;
-    this.content_type = ContentType.parse(contentType);
+    this.content_type = contentType;
     return this;
   }
 
   RequestBuilder setJsonContent(Map<dynamic, dynamic> jsonContent) {
     this.content = jsonContent;
-    this.content_type = ContentType.parse(_CONTENT_TYPE_JSON);
+    this.content_type = _CONTENT_TYPE_JSON;
     return this;
   }
 
@@ -262,7 +261,8 @@ class RequestBuilder {
               _data = content;
               requestOptions.contentType = content_type;
             } else {
-              requestOptions.contentType = _MjonirPostTransformer.requestBuilderType;
+              requestOptions.contentType =
+                  _MjonirPostTransformer.requestBuilderType;
             }
           }
           break;
@@ -450,11 +450,11 @@ Dio _client() {
 
 class _MjonirPostTransformer extends DefaultTransformer {
   static final requestBuilderType =
-      ContentType.parse("application/x-www-form-urlencoded;charset=UTF-8");
+      "application/x-www-form-urlencoded;charset=UTF-8";
 
   @override
   Future<String> transformRequest(RequestOptions options) {
-    if (options.contentType.value == requestBuilderType.value &&
+    if (options.contentType == requestBuilderType &&
         options.data is RequestBuilder) {
       return Future.sync(() => (options.data as RequestBuilder).toQuery());
     } else {

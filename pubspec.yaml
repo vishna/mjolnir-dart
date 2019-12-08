@@ -1,6 +1,6 @@
 name: mjolnir
 description: Mjolnir for Dart. An API SDK building tool.
-version: 0.0.21
+version: 0.1.0
 author: Lukasz Wisniewski <luke.cherrish@gmail.com>
 homepage: https://github.com/vishna/mjolnir-dart
 
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^2.1.13
+  dio: ^3.0.7
 
 dev_dependencies:
   flutter_test:

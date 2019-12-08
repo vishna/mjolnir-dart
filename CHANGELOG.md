@@ -1,3 +1,7 @@
+# 0.1.0
+
+- update to Dio 3.x and thus support Flutter Web
+
 # 0.0.21
 
 - fix "_smi is not a subtype of bool" exception
