@@ -450,7 +450,7 @@ Dio _client() {
 
 class _MjonirPostTransformer extends DefaultTransformer {
   static final requestBuilderType =
-      "application/x-www-form-urlencoded;charset=UTF-8";
+      "application/x-www-form-urlencoded;charset=utf-8";
 
   @override
   Future<String> transformRequest(RequestOptions options) {

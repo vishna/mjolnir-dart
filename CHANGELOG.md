@@ -1,3 +1,7 @@
+# 0.1.1
+
+- fix: UTF-8 content type needs to be lower case in transformer
+
 # 0.1.0
 
 - update to Dio 3.x and thus support Flutter Web
