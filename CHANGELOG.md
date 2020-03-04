@@ -1,3 +1,7 @@
+# 0.1.2
+
+- expose underlying dio client via `mjolnirClient` method
+
 # 0.1.1
 
 - fix: UTF-8 content type needs to be lower case in transformer

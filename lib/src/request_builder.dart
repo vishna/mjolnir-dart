@@ -437,15 +437,20 @@ class StringWrapper {
 Dio _clientSingleton;
 Dio _client() {
   if (_clientSingleton == null) {
-    final options = BaseOptions(
-      connectTimeout: 20 * 1000,
-      receiveTimeout: 30 * 1000,
-    );
-
-    _clientSingleton = new Dio(options);
-    _clientSingleton.transformer = _MjonirPostTransformer();
+    _clientSingleton = mjolnirClient();
   }
   return _clientSingleton;
+}
+
+Dio mjolnirClient() {
+  final options = BaseOptions(
+    connectTimeout: 20 * 1000,
+    receiveTimeout: 30 * 1000,
+  );
+
+  final client = new Dio(options);
+  client.transformer = _MjonirPostTransformer();
+  return client;
 }
 
 class _MjonirPostTransformer extends DefaultTransformer {
