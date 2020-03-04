@@ -1,3 +1,11 @@
+# 0.1.4
+
+- codegen fix to better handle array of strings
+
+# 0.1.3
+
+- expose `getClientSingletonLazy()`, allows retrieving global dio client
+
 # 0.1.2
 
 - expose underlying dio client via `mjolnirClient` method
@@ -12,7 +20,7 @@
 
 # 0.0.21
 
-- fix "_smi is not a subtype of bool" exception
+- fix _smi is not a subtype of bool_ exception
 
 # 0.0.20
 
