@@ -379,6 +379,8 @@ class RequestBuilder {
   static void setClientSingleton(Dio value) {
     _clientSingleton = value;
   }
+
+  static Dio getClientSingletonLazy() => _client();
 }
 
 Map<dynamic, dynamic> _parsePlainJson(String body) {

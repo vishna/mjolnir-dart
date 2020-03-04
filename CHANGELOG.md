@@ -1,3 +1,7 @@
+# 0.1.3
+
+- expose `getClientSingletonLazy()`, allows retrieving global dio client
+
 # 0.1.2
 
 - expose underlying dio client via `mjolnirClient` method
