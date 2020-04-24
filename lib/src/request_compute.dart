@@ -1,3 +1,4 @@
+// ignore_for_file: non_constant_identifier_names
 import 'request_builder.dart';
 import 'path_declutter.dart';
 

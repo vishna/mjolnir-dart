@@ -1,3 +1,4 @@
+// ignore_for_file: non_constant_identifier_names
 import 'dart:async';
 import 'dart:convert';
 
@@ -244,12 +245,12 @@ class RequestBuilder {
     dynamic _data = this;
 
     switch (method) {
-      case RequestMethod.delete:
       case RequestMethod.get:
         {
           // NO-OP
           break;
         }
+      case RequestMethod.delete:
       case RequestMethod.patch:
       case RequestMethod.put:
       case RequestMethod.post:

@@ -1,3 +1,7 @@
+# 0.1.5
+
+- fix `delete` method not working
+
 # 0.1.4
 
 - codegen fix to better handle array of strings
