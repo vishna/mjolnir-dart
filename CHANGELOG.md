@@ -1,3 +1,12 @@
+# 0.2.0
+
+- support configuration params in `mjolnir-codegen.yaml`
+
+> `equatable` (false by default) - causes generated classes to be extending from Equatable
+> `mjolnir_interface` (true by default) - causes generated classes to be implementing MjolnirObject
+> `lookup_table` (true by default) -  causes generated classes to have runtimeType to constructor lookup table
+> `paranoid` (false by default) -  adds extra resilience to wrong format and/or incorrect types in unparsed json
+
 # 0.1.5
 
 - fix `delete` method not working

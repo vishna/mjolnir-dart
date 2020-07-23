@@ -1,0 +1,12 @@
+## This file should be checked in version control
+## Describes sources and targets for the mjolnir-codegen tool
+- name: Auth.dart # base name
+  source: auth.yaml
+  lang: dart
+  target: lib/src/auth.dart
+# other_models: [MyCustomModel] # domain models refrenced in YAML but not defined
+  params:
+    equatable: true
+    paranoid: false
+    lookup_table: false
+    mjolnir_interface: false
