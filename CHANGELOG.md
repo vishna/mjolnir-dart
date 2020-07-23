@@ -1,5 +1,6 @@
 # 0.2.0
 
+- make `Account` immutable
 - support configuration params in `mjolnir-codegen.yaml`
 
 > `equatable` (false by default) - causes generated classes to be extending from Equatable
